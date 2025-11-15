@@ -31,16 +31,16 @@ multiplayer-chess
 
 ## 🛠️ Installation
 
->> cd Multiplayer-Chess
->> npm install
+```cd Multiplayer-Chess```
+```npm install```
 
 ---
 
 ## ▶️ Running the Server
 Start the Node.js server:
->> node index.js
+```node index.js```
 Then open your browser and visit:
-http://localhost:3000
+```http://localhost:3000```
 
 ---
 
@@ -60,9 +60,10 @@ Core dependencies from package.json:
 - express – for hosting static files
 - socket.io – for real-time communication
 Install them via:
->> npm install
+```npm install```
 
 ---
 
 ## 🖼️ Assets
+
 All chess piece and tile images are located under: public/assets/
