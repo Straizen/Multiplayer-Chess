@@ -1,0 +1,229 @@
+:root{
+    --bg: #1b1207;            /* page background - dark brown */
+    --panel: #24160c;         /* panels - deep brown */
+    --muted: #c9bfae;         /* muted text - warm beige */
+    --accent: #c79a2a;        /* main accent - gold */
+    --accent-2: #8b5a2b;      /* secondary accent - brown */
+    --board-border: #eadfbe;  /* border when needed */
+    --light-square: #d6c9b1;  /* warm light */
+    --dark-square: #b89a77;   /* warm dark */
+}
+
+*{box-sizing:border-box}
+body {
+    margin: 0;
+    background: linear-gradient(180deg,#1b1207 0%, #0f0a04 100%);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: var(--muted);
+    -webkit-font-smoothing:antialiased;
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+#topBar{
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    border-bottom:1px solid rgba(255,255,255,0.02);
+    background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.15));
+}
+.brand{font-weight:700; font-size:18px; color:var(--accent)}
+.brand{font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+.topActions{display:flex; gap:12px; align-items:center}
+.topActions #gameStatus{background:rgba(255,255,255,0.02); padding:6px 12px; border-radius:8px; color:var(--muted); font-weight:600}
+
+#layout {
+    display: grid;
+    grid-template-columns: 260px 1fr 300px;
+    gap: 20px;
+    height: calc(100vh - 64px);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#historyPanel {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: 12px;
+    padding: 16px;
+    overflow-y: auto;
+    border: 1px solid rgba(255,255,255,0.02);
+    box-shadow: 0 6px 20px rgba(2,6,23,0.5);
+}
+
+#historyPanel h2 {
+    margin-top: 0;
+    color: var(--accent-2);
+    font-size: 16px;
+    letter-spacing: 0.2px;
+}
+
+#moveHistory {
+    margin-top: 10px;
+}
+
+#boardContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#board {
+    width: 640px;
+    height: 640px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    box-shadow: 0 20px 50px rgba(2,6,23,0.6);
+    border: 1px solid rgba(255,255,255,0.02);
+}
+
+.square {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.square:hover {
+    transform: translateY(-4px) scale(1.006);
+}
+
+.square.selected {
+    box-shadow: 0 6px 22px rgba(199,154,42,0.12) inset;
+    transform: translateY(-2px) scale(1.006);
+}
+
+.square.last-move {
+    box-shadow: 0 0 0 4px rgba(199,154,42,0.12) inset;
+}
+
+.piece {
+    width: 78%;
+    height: 78%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+/* Controls panel */
+#controlPanel {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(255,255,255,0.02);
+    box-shadow: 0 12px 30px rgba(2,6,23,0.5);
+}
+
+#overlay {
+    position: absolute;
+    font-size: 40px;
+    font-weight: bold;
+    color: #d64f00;
+    background: rgba(255, 204, 0, 0.8);
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    display: none;
+}
+
+/* removed legacy light controlPanel styles so dark theme applies */
+
+.playerBox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.light {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: 2px solid rgba(255,255,255,0.04);
+    transition: box-shadow 140ms ease, background 140ms ease, transform 140ms ease;
+}
+
+.light.inactive{
+    opacity: 0.45;
+}
+
+ .light.active{
+    background: var(--accent);
+    box-shadow: 0 6px 20px rgba(199,154,42,0.18), 0 0 0 6px rgba(139,90,43,0.06) inset;
+    transform: scale(1.06);
+    opacity: 1;
+    border-color: rgba(255,255,255,0.06);
+}
+#uiButtons {
+    margin-top: 40px;
+}
+
+.row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+button{
+    cursor: pointer;
+    border: none;
+    padding: 9px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 6px 14px rgba(2,6,23,0.06);
+}
+
+button.primary{background:var(--accent); color:#1b1207}
+button.ghost{background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted)}
+button.warn{background:linear-gradient(90deg,#f97316,#fb7185); color:white}
+button.circle{
+    width:56px; height:56px; border-radius:999px; font-weight:700; display:inline-flex; align-items:center; justify-content:center;
+}
+
+.circle {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    font-size: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.01);
+    color: #e6eef6;
+    width: 160px;
+}
+
+.invite-code {
+    display: inline-block;
+    padding: 6px 10px;
+    background: linear-gradient(90deg, rgba(6,182,212,0.12), rgba(251,113,133,0.06));
+    border-radius: 8px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.move-entry{padding:8px 10px;border-radius:8px;margin-bottom:6px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);}
+.move-entry:nth-child(odd){opacity:0.95}
+.move-entry:nth-child(even){opacity:0.85}
+
+.footer-small{font-size:12px;color:var(--muted);}

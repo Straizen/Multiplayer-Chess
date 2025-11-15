@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Multiplayer Chess</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CHESS.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.12.0/chess.min.js"></script>
+
+    <!-- SOCKET.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+
+<header id="topBar">
+    <div class="brand">Multiplayer Chess</div>
+    <div class="topActions">
+        <div id="gameStatus">Waiting</div>
+    </div>
+</header>
+
+<div id="layout">
+
+    <!-- LEFT PANEL -->
+    <div id="historyPanel">
+        <h2>Move History</h2>
+        <div id="moveHistory"></div>
+    </div>
+
+    <!-- CENTER BOARD -->
+    <div id="boardContainer">
+        <div id="board"></div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div id="controlPanel">
+
+        <div class="playerBox">
+            <div class="light" id="p1light"></div>
+            <span>Player 1</span>
+        </div>
+
+        <div id="uiButtons">
+            <div class="row">
+                <button id="inviteBtn" class="primary">Invite</button>
+                <div id="inviteCode" class="invite-code">—</div>
+            </div>
+
+            <div class="row">
+                <button class="circle ghost" id="undoBtn">⟵</button>
+                <button class="circle primary" id="redoBtn">⟶</button>
+            </div>
+
+            <div class="row">
+                <button id="joinBtn" class="primary">Join</button>
+                <input id="joinInput" placeholder="Enter code">
+            </div>
+        </div>
+
+        <div class="playerBox">
+            <div class="light" id="p2light"></div>
+            <span>Player 2</span>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
